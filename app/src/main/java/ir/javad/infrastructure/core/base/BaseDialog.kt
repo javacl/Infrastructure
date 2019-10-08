@@ -11,7 +11,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import ir.javad.infrastructure.R
 import ir.javad.infrastructure.R.style
 import javax.inject.Inject
 
