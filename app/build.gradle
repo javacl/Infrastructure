@@ -1,0 +1,128 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.ext.compileVersion
+    buildToolsVersion = rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "ir.javad.infrastructure"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.tagetSdkVersion
+        versionCode rootProject.ext.codeVersion
+        versionName rootProject.ext.nameVersion
+        setProperty("archivesBaseName", "COMU-$versionName")
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "BASE_URL", "\"http://dev.signalpardazgroup.com\""
+        buildConfigField "String", "DB_NAME", "\"infrastructure.db\""
+        buildConfigField "String", "PREFS_NAME", "\"infrastructure\""
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig getSigningConfig()
+            android.applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "infrastructure-${variant.versionName}.apk"
+                }
+            }
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility rootProject.ext.sourceCompatibility
+        targetCompatibility rootProject.ext.targetCompatibility
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    kapt "com.android.databinding:compiler:$rootProject.dataBindingVersion"
+
+    // Support Libraries
+    implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
+    implementation "androidx.core:core:$rootProject.coreVersion"
+    implementation "androidx.legacy:legacy-support-v4:$rootProject.supportV4Version"
+    implementation "com.google.android.material:material:$rootProject.materialVersion"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersion"
+
+    // Lifecycle
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersino"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersino"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersino"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$rootProject.lifecycleVersino"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$rootProject.lifecycleVersino"
+
+    // Dagger
+    implementation "com.google.dagger:dagger-android:$rootProject.daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
+
+    // Thread
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutineVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutineVersion"
+
+    // Room
+    implementation "androidx.room:room-runtime:$rootProject.roomDatabaseVersion"
+    implementation "androidx.room:room-ktx:$rootProject.roomDatabaseVersion"
+    kapt "androidx.room:room-compiler:$rootProject.roomDatabaseVersion"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:${rootProject.ext.glideVersion}"
+    implementation "com.github.bumptech.glide:annotations:${rootProject.ext.glideVersion}"
+    implementation("com.github.bumptech.glide:okhttp3-integration:${rootProject.ext.glideVersion}") {
+        exclude group: 'glide-parent'
+    }
+    kapt "com.github.bumptech.glide:compiler:${rootProject.ext.glideVersion}"
+
+    // Json Parser
+    implementation "com.squareup.moshi:moshi:${rootProject.ext.moshiVersion}"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:${rootProject.ext.moshiVersion}"
+    implementation "se.ansman.kotshi:api:${rootProject.ext.kotshiVersion}"
+    kapt "se.ansman.kotshi:compiler:${rootProject.ext.kotshiVersion}"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofitVersion}"
+    implementation "com.squareup.okhttp3:okhttp:${rootProject.ext.okhttpVersion}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${rootProject.ext.okhttpVersion}"
+
+    // Converters
+    implementation "com.squareup.retrofit2:converter-moshi:${rootProject.ext.retrofitMoshiConverterVersion}"
+
+    // Parcel
+    implementation "org.parceler:parceler-api:${rootProject.ext.parcelerVersion}"
+    kapt "org.parceler:parceler:${rootProject.ext.parcelerVersion}"
+
+    // Others
+    implementation "com.ncapdevi:frag-nav:${rootProject.ext.fragNavVersion}"
+    implementation "de.hdodenhof:circleimageview:${rootProject.ext.ciracleImageViewVersion}"
+
+    // LeakCanary
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:${rootProject.ext.leakCanaryVersion}"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${rootProject.ext.leakCanaryVersion}"
+    testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${rootProject.ext.leakCanaryVersion}"
+
+    // Test
+    testImplementation "junit:junit:${rootProject.ext.junitVersion}"
+    androidTestImplementation "androidx.test:runner:${rootProject.ext.runnerVersion}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${rootProject.ext.espressoVersion}"
+}
