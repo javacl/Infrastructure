@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.LayoutRes
-import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import dagger.android.support.DaggerFragment
+import ir.javad.infrastructure.core.utils.ViewUtils
 import javax.inject.Inject
 
 abstract class BaseFragment<T : ViewDataBinding, V : ViewModel> :
@@ -48,10 +48,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : ViewModel> :
         mViewDataBinding =
             DataBindingUtil.inflate(inflater, layoutId, container, false)
         val view = mViewDataBinding.root
-        ViewCompat.setLayoutDirection(
-            view,
-            ViewCompat.LAYOUT_DIRECTION_LTR
-        )
+        ViewUtils.directionView(view, isLtr = true)
         return view
     }
 

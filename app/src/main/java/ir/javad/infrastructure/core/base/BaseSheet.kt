@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.view.WindowManager.LayoutParams
 import android.widget.FrameLayout
 import androidx.annotation.LayoutRes
-import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
@@ -19,6 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import ir.javad.infrastructure.R
 import ir.javad.infrastructure.R.style
+import ir.javad.infrastructure.core.utils.ViewUtils
 import javax.inject.Inject
 
 abstract class BaseSheet<T : ViewDataBinding, V : ViewModel> :
@@ -83,10 +83,7 @@ abstract class BaseSheet<T : ViewDataBinding, V : ViewModel> :
         mViewDataBinding =
             DataBindingUtil.inflate(inflater, layoutId, container, false)
         val view = mViewDataBinding.root
-        ViewCompat.setLayoutDirection(
-            view,
-            ViewCompat.LAYOUT_DIRECTION_LTR
-        )
+        ViewUtils.directionView(view, isLtr = true)
         return view
     }
 

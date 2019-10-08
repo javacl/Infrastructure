@@ -2,15 +2,14 @@ package ir.javad.infrastructure.core.base
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.annotation.LayoutRes
-import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import dagger.android.support.DaggerAppCompatActivity
+import ir.javad.infrastructure.core.utils.ViewUtils
 import javax.inject.Inject
 
 abstract class BaseActivity<T : ViewDataBinding, V : ViewModel>
@@ -58,11 +57,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : ViewModel>
 
     private fun performDataBinding() {
         mViewDataBinding = DataBindingUtil.setContentView(this, layoutId)
-        val view: View = mViewDataBinding.root
-        ViewCompat.setLayoutDirection(
-            view,
-            ViewCompat.LAYOUT_DIRECTION_LTR
-        )
+        ViewUtils.directionView(mViewDataBinding.root, isLtr = true)
         mViewModel = viewModel
         mViewDataBinding.setVariable(bindingVariable, mViewModel)
         mViewDataBinding.lifecycleOwner = this

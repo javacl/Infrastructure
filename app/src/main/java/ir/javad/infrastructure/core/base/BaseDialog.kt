@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import ir.javad.infrastructure.R.style
+import ir.javad.infrastructure.core.utils.ViewUtils
 import javax.inject.Inject
 
 abstract class BaseDialog<T : ViewDataBinding, V : ViewModel> :
@@ -52,10 +52,7 @@ abstract class BaseDialog<T : ViewDataBinding, V : ViewModel> :
         mViewDataBinding =
             DataBindingUtil.inflate(inflater, layoutId, container, false)
         val view = mViewDataBinding.root
-        ViewCompat.setLayoutDirection(
-            view,
-            ViewCompat.LAYOUT_DIRECTION_LTR
-        )
+        ViewUtils.directionView(view, isLtr = true)
         return view
     }
 
