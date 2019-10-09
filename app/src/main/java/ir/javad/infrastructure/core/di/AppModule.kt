@@ -13,7 +13,7 @@ import ir.javad.infrastructure.core.local.db.InfrastructureDb
 import ir.javad.infrastructure.core.utils.NetworkHandler
 import ir.javad.infrastructure.core.utils.ThreadProvider
 import ir.javad.infrastructure.core.utils.api.ApplicationJsonAdapterFactory
-import ir.javad.infrastructure.view.mainActivity.ui.MainActivityModule
+import ir.javad.infrastructure.view.mainActivity.data.MainActivityModule
 import kotlinx.coroutines.Dispatchers
 import okhttp3.ConnectionPool
 import okhttp3.Dispatcher

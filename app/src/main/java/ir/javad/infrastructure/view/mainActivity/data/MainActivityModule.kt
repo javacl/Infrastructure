@@ -1,10 +1,8 @@
-package ir.javad.infrastructure.view.mainActivity.ui
+package ir.javad.infrastructure.view.mainActivity.data
 
 import dagger.Module
 import dagger.Provides
 import ir.javad.infrastructure.core.local.db.InfrastructureDb
-import ir.javad.infrastructure.view.mainActivity.data.MainActivityDao
-import ir.javad.infrastructure.view.mainActivity.data.MainActivityService
 import retrofit2.Retrofit
 import javax.inject.Singleton
 
